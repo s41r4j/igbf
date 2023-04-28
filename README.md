@@ -49,7 +49,7 @@ optional arguments:
 
 ### Wordlists
 
-Those who are using hacking linux machine (like kali/parrot os, which has pre-installed stuff), can find password wordlist at `/usr/share/wordlists/` (mostly `rockyou.txt, if it is `rockyou.txt.gz` - unzip with `tar -xvzf rockyou.txt.gz`)
+Those who are using hacking linux machine (like kali/parrot os, which has pre-installed stuff), can find password wordlist at `/usr/share/wordlists/` (mostly `rockyou.txt`, if it is `rockyou.txt.gz` - unzip with `tar -xvzf rockyou.txt.gz`)
 
 Download links (password wordlists):
 - [praetorian-inc/Hob0Rules/__wordlists__](https://github.com/praetorian-inc/Hob0Rules/tree/master/wordlist)
