@@ -47,7 +47,7 @@ optional arguments:
 
 <br>
 
-### Wordlists
+### Wordlists :page_with_curl:
 
 Those who are using hacking linux machine (like kali/parrot os, which has pre-installed stuff), can find password wordlist at `/usr/share/wordlists/` (mostly `rockyou.txt`, if it is `rockyou.txt.gz` - unzip with `tar -xvzf rockyou.txt.gz`)
 
@@ -57,4 +57,11 @@ Download links (password wordlists):
 
 Find more @ [Kaggle](https://www.kaggle.com/search?q=Common+Password+List) (also [this](https://www.kaggle.com/search?q=Password+List))
 
+
+<br>
+
+### Note :bookmark_tabs:
+- It only supports single username (currently), so feel free to add features (do PR) & contribute
+- __Language__: Python3, __OS__: Win, Mac, Unix/Linux
+- If you have any quries/issues/errors, open an issue [here](https://github.com/s41r4j/igbf/issues)
 
