@@ -7,7 +7,7 @@
 
 ## Disclaimer :warning:
 - [ igbf ]: is a __proof-of-concept__ & build for __educational purpose__
-- You should have __explict__ permission for testing _account security_ from the _owner_ (remember)
+- You should have __explict__ permission for testing _account security_ from the _owner_ (remember _“With great power comes great responsibility”_)
 - [dev](https://github.com/s41r4j) is not responsible for any illegal use (it is end user's responsibility)
 
 <br>
