@@ -69,6 +69,7 @@ Find more @ [Kaggle](https://www.kaggle.com/search?q=Common+Password+List) (also
 
 ### Note :bookmark_tabs:
 - It only supports single username (currently), so feel free to add features (do PR) & contribute
+- I tried to integrate proxies for every request, but currently it's not working (-g gives non working proxies)
 - __Language__: Python3, __OS__: Win, Mac, Unix/Linux
 - If you have any quries/issues/errors, open an issue [here](https://github.com/s41r4j/igbf/issues)
 
