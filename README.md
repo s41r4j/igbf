@@ -1,7 +1,7 @@
 <h1 align=center> [ igbf ]: Instagram Brute Force (login) </h1>
 <h3 align=center> Brute Force Instargam accounts w/ dictionary attack and get the login password! </h3>
 
-![igbf_demo_clear](https://user-images.githubusercontent.com/65067289/235079157-ce36bdd1-b2ea-45a0-86c1-6052db428fd1.png)
+![igbf_demo_clear](https://user-images.githubusercontent.com/65067289/235207665-62c45b02-223f-4bb3-8304-d8736d8b36ea.png)
 
 <br><br>
 
@@ -27,7 +27,7 @@ Just clone and start using, no need to install any requirements (but internet co
 `python3 igbf.py` / `python3 igbf.py -h`
 
 ```
-usage: igbf.py [-h] [-u USERNAME] [-w WORDLIST]
+usage: igbf.py [-h] [-u USERNAME] [-w WORDLIST PATH] [-t TIMEOUT] [-g [PATH_TO_SAVE_PROXY_LIST]] [-p [PATH_TO_PROXY_LIST]]
 
 (s41r4j:igbf)> Instagram Brute Force
 
@@ -35,8 +35,15 @@ optional arguments:
   -h, --help            show this help message and exit
   -u USERNAME, --username USERNAME
                         instagram username
-  -w WORDLIST, --wordlist WORDLIST
+  -w WORDLIST PATH, --wordlist WORDLIST PATH
                         password wordlist
+  -t TIMEOUT, --timeout TIMEOUT
+                        timeout between each request (default: 2)
+  -g [PATH_TO_SAVE_PROXY_LIST], --generate-proxy-list [PATH_TO_SAVE_PROXY_LIST]
+                        genereate proxy list (give full path, ending with '/' or '\')
+  -p [PATH_TO_PROXY_LIST], --proxy [PATH_TO_PROXY_LIST]
+                        use proxy list (give full path, ending with "/" or "\")
+
 ```
 
 <br>
