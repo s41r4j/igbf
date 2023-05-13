@@ -1,9 +1,8 @@
 <h1 align=center> [ igbf ]: Instagram Brute Forcer </h1>
+<h3 align=center> Brute Force Instargam account logins w/ dictionary attack! </h3>
 
 
-
-
-<p align="center">
+<!-- <p align="center">
     <a href="#" alt="version">
         <img src="https://img.shields.io/badge/dynamic/json?color=blue&label=version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Fs41r4j%2Figbf%2Fmain%2F.media%2Fmaintainer.json" /></a>
     <a href="#" alt="language">
@@ -12,27 +11,25 @@
         <img src="https://img.shields.io/badge/dynamic/json?color=success&label=latest release&query=%24.release&url=https%3A%2F%2Fraw.githubusercontent.com%2Fs41r4j%2Figbf%2Fmain%2F.media%2Fmaintainer.json" /></a>
     <a href="#" alt="Stars">
         <img src="https://img.shields.io/github/stars/s41r4j/igbf.svg" /></a>
-<!--     <a href="https://github.com/s41r4j/igbf" alt="Activity">
-        <img src="https://img.shields.io/github/commit-activity/m/s41r4j/igbf" /></a> -->
+    <a href="https://github.com/s41r4j/igbf" alt="Activity">
+        <img src="https://img.shields.io/github/commit-activity/m/s41r4j/igbf" /></a>
     <a href="https://twitter.com/intent/follow?screen_name=s41r4j">
         <img src="https://img.shields.io/twitter/follow/s41r4j?style=social&logo=twitter"
             alt="follow on Twitter"></a>
-</p>
-
-
+</p> -->
 
 
 ![igbf demo](./.media/igbf_demo.gif)
 
-<h3 align=center> Brute Force Instargam account logins w/ dictionary attack! </h3>
 
 
 <br><br>
 
 ## Disclaimer :warning:
-- [ igbf ]: is a __proof-of-concept__ & build for __educational purpose__
-- You should have __explict__ permission for testing _account security_ from the _owner_ (remember _“With great power comes great responsibility”_)
-- [developer](https://github.com/s41r4j) is not responsible for any illegal use (it is end user's responsibility)
+- This [project](https://github.com/s41r4j/igbf/) is only a __proof-of-concept__ & build for __educational purpose__
+- You should have __explict__ permission for testing _account security_ from the _owner_ 
+- [developer](https://github.com/s41r4j) is not responsible for any illegal use, it is end user's responsibility
+>  _“With great power comes great responsibility”_
 
 <br>
 
@@ -40,7 +37,9 @@
 
 - ___Installation___
 
-Just clone and start using, no need to install any requirements (but internet connection is essential)
+Just clone and start using, no need of installing any requirements.
+    - Internet connection is essential
+    
 
 `git clone https://github.com/s41r4j/igbf`   (`cd igbf`)
 
@@ -94,6 +93,13 @@ Find more @ [Kaggle](https://www.kaggle.com/search?q=Common+Password+List) (also
 ### Note :bookmark_tabs:
 - It only supports single username (currently) & a wordlist file.
 - I tried to integrate proxy ip rotating for every request, but currently it's not working
+- If you're not using proxy, instagram blocks/bans your ip (temporarily) after 7-8 attempts
+
 - __Language__: Python3; __OS__: Win, Mac, Unix/Linux (also Termux ig)
 - If you have any quries/issues/errors, open an issue [here](https://github.com/s41r4j/igbf/issues)
+- I'm open to all contributions, clone and do a pull request
+
+
+
+![starchart](https://starchart.cc/{username}/{repo}.svg)
 
