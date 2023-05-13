@@ -19,7 +19,7 @@
 </p> -->
 
 
-![igbf demo](./.media/igbf_demo.gif)
+![igbf demo](./.media/igbf_demo_compress.gif)
 
 
 
