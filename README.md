@@ -57,7 +57,7 @@ python3 igbf.py
 ```
 
 ``` bash
-usage: igbf.py [-h] [-u USERNAME] [-w WORDLIST PATH] [-t TIMEOUT] [-v] [-p] [-pl PROXY_LIMIT]
+usage: igbf.py [-h] [-u USERNAME] [-w WORDLIST PATH] [-t TIMEOUT] [-v] [-p] [-l PROXY_LIMIT]
 
 (s41r4j:igbf)> Instagram Brute Forcer
 
