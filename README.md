@@ -1,8 +1,12 @@
 <h1 align=center> [ igbf ]: Instagram Brute Forcer </h1>
+
+![tags](https://img.shields.io/badge/Version-1.2-blue)
+![release](https://img.shields.io/github/v/release/s41r4j/igbf)
+
+![igbf demo](./.media/igbf_demo.gif)
+
 <h3 align=center> Brute Force Instargam account logins w/ dictionary attack! </h3>
 
-<!-- ![igbf_demo_clear](https://user-images.githubusercontent.com/65067289/235207665-62c45b02-223f-4bb3-8304-d8736d8b36ea.png) -->
-![](./.media/igbf_demo.gif)
 
 <br><br>
 
