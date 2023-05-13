@@ -1,7 +1,26 @@
 <h1 align=center> [ igbf ]: Instagram Brute Forcer </h1>
 
-![tags](https://img.shields.io/badge/Version-1.2-blue)
-![release](https://img.shields.io/github/v/release/s41r4j/igbf)
+
+
+
+<p align="center">
+    <a href="#" alt="version">
+        <img src="https://img.shields.io/badge/dynamic/json?color=blue&label=version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Fs41r4j%2Figbf%2Fmain%2F.media%2Fmaintainer.json" /></a>
+    <a href="#" alt="language">
+        <img src="https://img.shields.io/badge/dynamic/json?color=blue&label=language&query=%24.language&url=https%3A%2F%2Fraw.githubusercontent.com%2Fs41r4j%2Figbf%2Fmain%2F.media%2Fmaintainer.json" /></a>
+  <a href="https://github.com/s41r4j/igbf/releases" alt="latest release">
+        <img src="https://img.shields.io/badge/dynamic/json?color=success&label=latest release&query=%24.release&url=https%3A%2F%2Fraw.githubusercontent.com%2Fs41r4j%2Figbf%2Fmain%2F.media%2Fmaintainer.json" /></a>
+    <a href="#" alt="Stars">
+        <img src="https://img.shields.io/github/stars/s41r4j/igbf.svg" /></a>
+<!--     <a href="https://github.com/s41r4j/igbf" alt="Activity">
+        <img src="https://img.shields.io/github/commit-activity/m/s41r4j/igbf" /></a> -->
+    <a href="https://twitter.com/intent/follow?screen_name=s41r4j">
+        <img src="https://img.shields.io/twitter/follow/s41r4j?style=social&logo=twitter"
+            alt="follow on Twitter"></a>
+</p>
+
+
+
 
 ![igbf demo](./.media/igbf_demo.gif)
 
