@@ -251,7 +251,7 @@ def main():
     parser.add_argument('-t', '--timeout', help='timeout between each request in secs (default: 2)', default=2, type=int)
     parser.add_argument('-v', '--verbose', help='verbose mode (displays failed logins and more)', action='store_true', default=False)
     parser.add_argument('-p', '--proxy', help='use ip rotating proxy (additinal library required)', action='store_true', default=False)
-    parser.add_argument('-pl', '--proxy-limit', help='limit the number of proxies to use (default: 300; max: 300; min: 1)', default=300, type=int)
+    parser.add_argument('-l', '--proxy-limit', help='limit the number of proxies to use (default: 300; max: 300; min: 1)', default=300, type=int)
     args = parser.parse_args()
 
     # Assigning the arguments to variables
