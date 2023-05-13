@@ -40,6 +40,7 @@
     - Just clone and start using, no need of installing any requirements.
     - Internet connection is essential
     - To use proxy, a library (`pip install beautifulsoup4`) is required; The program installs it for you while running (if not present)
+    - Also you can get the latest version from [releases](https://github.com/s41r4j/igbf/releases)
     
 
 ```bash
@@ -99,15 +100,15 @@ Find more @[Kaggle](https://www.kaggle.com/search?q=Common+Password+List) & @[Gi
 <br>
 
 ### Note :bookmark_tabs:
-- It only supports single username (currently) & a wordlist file.
-- I tried to integrate proxy ip rotating for every request, but currently it's not working
-- If you're not using proxy, instagram blocks/bans your ip (temporarily) after 7-8 attempts
-
-- __Language__: Python3; __OS__: Win, Mac, Unix/Linux (also Termux ig)
+    - It only supports single username (currently) & a wordlist file
+    - I tried to integrate proxy ip rotating for every request, but there are some issues at the moment
+    - If you're not using proxy, instagram blocks/bans your ip (temporarily, dw) after 7-8 attempts
+    - Supports: Windows, Mac, Unix/Linux (Termux)
+    
 - If you have any quries/issues/errors, open an issue [here](https://github.com/s41r4j/igbf/issues)
 - I'm open to all contributions, clone and do a pull request
 
 
 
-![starchart](https://starchart.cc/{username}/{repo}.svg)
+<!-- ![starchart](https://starchart.cc/s41r4j/igbf.svg) -->
 
