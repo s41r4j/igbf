@@ -71,7 +71,7 @@ optional arguments:
                         timeout between each request in secs (default: 2)
   -v, --verbose         verbose mode (displays failed logins and more)
   -p, --proxy           use ip rotating proxy (additinal library required)
-  -pl PROXY_LIMIT, --proxy-limit PROXY_LIMIT
+  -l PROXY_LIMIT, --proxy-limit PROXY_LIMIT
                         limit the number of proxies to use (default: 300; max: 300; min: 1)
 
 ```
