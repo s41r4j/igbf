@@ -1,5 +1,5 @@
-<h1 align=center> [ igbf ]: Instagram Brute Force (login) </h1>
-<h3 align=center> Brute Force Instargam accounts w/ dictionary attack and get the login password! </h3>
+<h1 align=center> [ igbf ]: Instagram Brute Forcer </h1>
+<h3 align=center> Brute Force Instargam account logins w/ dictionary attack! </h3>
 
 ![igbf_demo_clear](https://user-images.githubusercontent.com/65067289/235207665-62c45b02-223f-4bb3-8304-d8736d8b36ea.png)
 
@@ -8,7 +8,7 @@
 ## Disclaimer :warning:
 - [ igbf ]: is a __proof-of-concept__ & build for __educational purpose__
 - You should have __explict__ permission for testing _account security_ from the _owner_ (remember _“With great power comes great responsibility”_)
-- [dev](https://github.com/s41r4j) is not responsible for any illegal use (it is end user's responsibility)
+- [developer](https://github.com/s41r4j) is not responsible for any illegal use (it is end user's responsibility)
 
 <br>
 
@@ -27,22 +27,22 @@ Just clone and start using, no need to install any requirements (but internet co
 `python3 igbf.py` / `python3 igbf.py -h`
 
 ```
-usage: igbf.py [-h] [-u USERNAME] [-w WORDLIST PATH] [-t TIMEOUT] [-g [PATH_TO_SAVE_PROXY_LIST]] [-p [PATH_TO_PROXY_LIST]]
+usage: igbf.py [-h] [-u USERNAME] [-w WORDLIST PATH] [-t TIMEOUT] [-v] [-p] [-pl PROXY_LIMIT]
 
 (s41r4j:igbf)> Instagram Brute Force
 
 optional arguments:
   -h, --help            show this help message and exit
   -u USERNAME, --username USERNAME
-                        instagram username
+                        instagram username (*required)
   -w WORDLIST PATH, --wordlist WORDLIST PATH
-                        password wordlist
+                        password wordlist (*required)
   -t TIMEOUT, --timeout TIMEOUT
-                        timeout between each request (default: 2)
-  -g [PATH_TO_SAVE_PROXY_LIST], --generate-proxy-list [PATH_TO_SAVE_PROXY_LIST]
-                        genereate proxy list (give full path, ending with '/' or '\')
-  -p [PATH_TO_PROXY_LIST], --proxy [PATH_TO_PROXY_LIST]
-                        use proxy list (give full path, ending with "/" or "\")
+                        timeout between each request in secs (default: 2)
+  -v, --verbose         verbose mode (displays failed logins and more)
+  -p, --proxy           use ip rotating proxy (additinal library required)
+  -pl PROXY_LIMIT, --proxy-limit PROXY_LIMIT
+                        limit the number of proxies to use (default: 300; max: 300; min: 1)
 
 ```
 
@@ -68,8 +68,8 @@ Find more @ [Kaggle](https://www.kaggle.com/search?q=Common+Password+List) (also
 <br>
 
 ### Note :bookmark_tabs:
-- It only supports single username (currently), so feel free to add features (do PR) & contribute
-- I tried to integrate proxies for every request, but currently it's not working (-g gives non working proxies)
-- __Language__: Python3, __OS__: Win, Mac, Unix/Linux (also Termux)
+- It only supports single username (currently) & a wordlist file.
+- I tried to integrate proxy ip rotating for every request, but currently it's not working
+- __Language__: Python3; __OS__: Win, Mac, Unix/Linux (also Termux ig)
 - If you have any quries/issues/errors, open an issue [here](https://github.com/s41r4j/igbf/issues)
 
