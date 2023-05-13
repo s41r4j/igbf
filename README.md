@@ -38,21 +38,27 @@
 - ___Installation___
 
 Just clone and start using, no need of installing any requirements.
-    - Internet connection is essential
+- Internet connection is essential
+- To use proxy, a library (`pip install beautifulsoup4`) is required; The program installs it for you while running (if not present)
     
 
-`git clone https://github.com/s41r4j/igbf`   (`cd igbf`)
+```bash
+git clone https://github.com/s41r4j/igbf
+cd igbf
+```
 
 <br>
 
 - ___Help Menu___
 
-`python3 igbf.py` / `python3 igbf.py -h`
+```bash
+python3 igbf.py
+```
 
 ```
 usage: igbf.py [-h] [-u USERNAME] [-w WORDLIST PATH] [-t TIMEOUT] [-v] [-p] [-pl PROXY_LIMIT]
 
-(s41r4j:igbf)> Instagram Brute Force
+(s41r4j:igbf)> Instagram Brute Forcer
 
 optional arguments:
   -h, --help            show this help message and exit
