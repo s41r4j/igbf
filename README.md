@@ -37,9 +37,9 @@
 
 - ___Installation___
 
-Just clone and start using, no need of installing any requirements.
-- Internet connection is essential
-- To use proxy, a library (`pip install beautifulsoup4`) is required; The program installs it for you while running (if not present)
+    - Just clone and start using, no need of installing any requirements.
+    - Internet connection is essential
+    - To use proxy, a library (`pip install beautifulsoup4`) is required; The program installs it for you while running (if not present)
     
 
 ```bash
