@@ -55,7 +55,7 @@ cd igbf
 python3 igbf.py
 ```
 
-```
+``` bash
 usage: igbf.py [-h] [-u USERNAME] [-w WORDLIST PATH] [-t TIMEOUT] [-v] [-p] [-pl PROXY_LIMIT]
 
 (s41r4j:igbf)> Instagram Brute Forcer
@@ -79,19 +79,21 @@ optional arguments:
 
 - ___Example___
 
-`python3 igbf.py -u USERNAME -w /PATH/TO/PASSWORD/WORDLIST`
+```bash
+python3 igbf.py -u USERNAME -w /PATH/TO/PASSWORD/WORDLIST -v
+```
 
 <br>
 
 ### Wordlists :page_with_curl:
 
-Those who are using hacking linux machine (like kali/parrot os, which has pre-installed stuff), can find password wordlist at `/usr/share/wordlists/` (mostly `rockyou.txt`, if it is `rockyou.txt.gz` - unzip with `tar -xvzf rockyou.txt.gz`)
+Those who are using linux/hacking machines (like kali/parrot os, which has pre-installed stuff), can find password wordlist at `/usr/share/wordlists/` (mostly `rockyou.txt`, if it is `rockyou.txt.gz` - unzip with `tar -xvzf rockyou.txt.gz`)
 
-Download links (password wordlists):
+Download links for password wordlists:
 - [praetorian-inc/Hob0Rules/__wordlists__](https://github.com/praetorian-inc/Hob0Rules/tree/master/wordlist)
 - [danielmiessler/__SecLists__/Passwords/Common-Creden](https://github.com/danielmiessler/SecLists/tree/master/Passwords/Common-Credentials)
 
-Find more @ [Kaggle](https://www.kaggle.com/search?q=Common+Password+List) (also [this](https://www.kaggle.com/search?q=Password+List))
+Find more @[Kaggle](https://www.kaggle.com/search?q=Common+Password+List) & @[Github](https://github.com/search?q=passwords%20wordlists&type=repositories)
 
 
 <br>
