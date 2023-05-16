@@ -103,7 +103,7 @@ Find more @[Kaggle](https://www.kaggle.com/search?q=Common+Password+List) & @[Gi
 <br>
 
 ### Note :bookmark_tabs:
-    - It only supports single username (currently) & a wordlist file
+    - It only supports single username (currently)
     - I tried to integrate proxy ip rotating for every request, but there are some issues at the moment
     - If you're not using proxy, instagram blocks/bans your ip (temporarily, dw) after 7-8 attempts
     - Supports: Windows, Mac, Unix/Linux (Termux)
