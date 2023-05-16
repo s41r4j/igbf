@@ -57,7 +57,7 @@ python3 igbf.py
 ```
 
 ``` bash
-usage: igbf.py [-h] [-u USERNAME] [-w WORDLIST PATH] [-t TIMEOUT] [-v] [-p] [-l PROXY_LIMIT]
+usage: igbf.py [-h] [-u USERNAME] [-w WORDLIST PATH] [-t TIMEOUT] [-v] [-p] [-l PROXY_LIMIT] [-f PROXY FILE PATH]
 
 (s41r4j:igbf)> Instagram Brute Forcer
 
@@ -70,9 +70,12 @@ optional arguments:
   -t TIMEOUT, --timeout TIMEOUT
                         timeout between each request in secs (default: 2)
   -v, --verbose         verbose mode (displays failed logins and more)
-  -p, --proxy           use ip rotating proxy (additinal library required)
+  -p, --proxy           built-in ip rotating proxy (additinal library required)
   -l PROXY_LIMIT, --proxy-limit PROXY_LIMIT
                         limit the number of proxies to use (default: 300; max: 300; min: 1)
+  -f PROXY FILE PATH, --proxy-file PROXY FILE PATH
+                        use custom proxy file (`-p` & `-l` disabled)
+
 
 ```
 
