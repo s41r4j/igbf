@@ -4,7 +4,7 @@
 #                                                                     #
 #  [igbf]    : Instagram Brute Forcer                                 #
 #  [desc]    : python3 script to perform instagram login brute force  #
-#  [version] : 1.3                                                    #
+#  [version] : 1.4                                                    #
 #  [dev]     : @s41r4j                                                #
 #  [github]  : https://github.com/s41r4j/igbf                         #
 #                                                                     #
@@ -329,7 +329,7 @@ def main():
     printit("▒ ░░ ░   ░  ░    ░  ░ ░   ░▒ ", center=' ', coledt=[1, 49, 91])
     printit("░        ░  ░                 ", center=' ', coledt=[1, 49, 91])
     printit("                  ░          ░ ", center=' ', coledt=[1, 49, 91])
-    printit('[ Instagram Brute Forcer (igbf:v1.3) ]', center=' ', coledt=[7, 49, 97], line_down=True)
+    printit('[ Instagram Brute Forcer (igbf:v1.4) ]', center=' ', coledt=[7, 49, 97], line_down=True)
 
     # Checking if the arguments have been passed
     if username is None or wordlist is None:
@@ -372,7 +372,7 @@ def main():
     elif proxy: proxies = builtin_proxy(verbose, proxy_limit)
     
     # If proxy is enabled and no working proxies found
-    if len(proxies) == 0:
+    if (proxy or proxy_file) and len(proxies) == 0:
         printit('[!] No working proxies found', coledt=[1, 49, 91]) 
         while True:
             print("[?] Continue without proxy? (y/n): ", end='')
