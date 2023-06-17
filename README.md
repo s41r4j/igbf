@@ -93,11 +93,17 @@ python3 igbf.py -u USERNAME -w /PATH/TO/PASSWORD/WORDLIST -v
 
 Those who are using linux/hacking machines (like kali/parrot os, which has pre-installed stuff), can find password wordlist at `/usr/share/wordlists/` (mostly `rockyou.txt`, if it is `rockyou.txt.gz` - unzip with `tar -xvzf rockyou.txt.gz`)
 
-Download links for password wordlists:
-- [praetorian-inc/Hob0Rules/__wordlists__](https://github.com/praetorian-inc/Hob0Rules/tree/master/wordlist)
-- [danielmiessler/__SecLists__/Passwords/Common-Creden](https://github.com/danielmiessler/SecLists/tree/master/Passwords/Common-Credentials)
+- Download links for password wordlists:
+  - [praetorian-inc/Hob0Rules/__wordlists__](https://github.com/praetorian-inc/Hob0Rules/tree/master/wordlist)
+  - [danielmiessler/__SecLists__/Passwords/Common-Creden](https://github.com/danielmiessler/SecLists/tree/master/Passwords/Common-Credentials)
+  - Find more @[Kaggle](https://www.kaggle.com/search?q=Common+Password+List) & @[Github](https://github.com/search?q=passwords%20wordlists&type=repositories)
 
-Find more @[Kaggle](https://www.kaggle.com/search?q=Common+Password+List) & @[Github](https://github.com/search?q=passwords%20wordlists&type=repositories)
+
+- Generate custom wordlist:
+  - [Common User Passwords Profiler (CUPP)](https://github.com/Mebus/cupp)
+  - [Mentalist (graphical tool)](https://github.com/sc0tfree/mentalist)
+  - This [article](https://null-byte.wonderhowto.com/how-to/create-custom-wordlists-for-password-cracking-using-mentalist-0183992/) may help
+
 
 
 <br>
