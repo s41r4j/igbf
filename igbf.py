@@ -422,19 +422,24 @@ def main():
             "x-csrftoken": csrf_token,
         }
 
-        # Checking if proxy is enabled (if, then use proxy)
-        if proxy:
-            # get random proxy from proxy list
-            random_proxy = random.choice(list(proxies))
-            single_proxy = {
-                'http': random_proxy,
-                'https': random_proxy
-            }
-        else:
-            single_proxy = None
+        while True:
+            # Checking if proxy is enabled (if, then use proxy)
+            if proxy:
+                # get random proxy from proxy list
+                random_proxy = random.choice(list(proxies))
+                single_proxy = {
+                    'http': random_proxy,
+                    'https': random_proxy
+                }
+            else:
+                single_proxy = None
 
-        # Sending the request
-        login_response = requests.post(login_url, data=payload, headers=login_header, proxies=single_proxy)
+            # Sending the request
+            try:
+                login_response = requests.post(login_url, data=payload, headers=login_header, proxies=single_proxy)
+                break
+            except requests.exceptions.ConnectionError:
+                continue
 
         # proxy check if working
         if proxy:
@@ -511,7 +516,4 @@ if __name__ == '__main__':
         main()
     except KeyboardInterrupt:
         printit('\n\n[:)] Exiting the program...', coledt=[1, 49, 92], line_down=True)
-        sys.exit()
-    except requests.exceptions.ConnectionError:
-        printit("\n[!] Internet connection is required!\n[;)] Exiting the program...", coledt=[1, 49, 91], line_down=True)
-        sys.exit()
+        sys.exit()   
