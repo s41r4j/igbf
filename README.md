@@ -113,7 +113,7 @@ Those who are using linux/hacking machines (like kali/parrot os, which has pre-i
     - Supports: Windows, Mac, Unix/Linux (Termux)
     
 - If you have any quries/issues/errors, open an issue [here](https://github.com/s41r4j/igbf/issues)
-- I'm open to all contributions, clone and do a pull request
+- All contributions are welcomed, do a pull request
 
 
 
