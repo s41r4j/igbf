@@ -51,7 +51,8 @@ cd igbf
 <br>
 
 - ___Update___
-    - Goto the `igbf` directory and type `git pull` to update to latest version or download latest from [releases](https://github.com/s41r4j/igbf/releases)
+    - Goto the `igbf` directory and type `git pull` to update to latest version
+    - Else download latest version of script from [releases](https://github.com/s41r4j/igbf/releases)
 
 <br>
 
@@ -112,9 +113,9 @@ Those who are using linux/hacking machines (like kali/parrot os, which has pre-i
 <br>
 
 ### Note :bookmark_tabs:
-    - It only supports single username (currently)
-    - I tried to integrate proxy ip rotating for every request, but there are some issues at the moment
+    - It only supports single username (currently
     - If you're not using proxy, instagram blocks/bans your ip (temporarily, dw) after 7-8 attempts
+    - Now proxies work fine, but the only problem it is time consuming and slow
     - Supports: Windows, Mac, Unix/Linux (Termux)
     
 - If you have any quries/issues/errors, open an issue [here](https://github.com/s41r4j/igbf/issues)
