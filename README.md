@@ -50,6 +50,11 @@ cd igbf
 
 <br>
 
+- ___Update___
+    - Goto the `igbf` directory and type `git pull` to update to latest version or download latest from [releases](https://github.com/s41r4j/igbf/releases)
+
+<br>
+
 - ___Help Menu___
 
 ```bash
