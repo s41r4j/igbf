@@ -295,6 +295,11 @@ def main():
     parser.add_argument('-f', '--proxy-file', help='use custom proxy file (`-p` & `-l` disabled)', metavar='PROXY FILE PATH', default=False)
     # parser.add_argument('-g', '--get', help='update the program to the latest version', action='store_true', default=False)
     args = parser.parse_args()
+    
+    # Check for conflicting options
+    if args.proxy and args.proxy_file:
+        print("Error: You cannot use both the built-in proxy (`-p`) and a custom proxy file (`-f`).")
+        sys.exit(1)
 
     # Assigning the arguments to variables
     username = args.username
